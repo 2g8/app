@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+//author    : ding@gong.si
+//created   : 2017/9/18 18:09
+defined('APP_PATH') or define('APP_PATH', dirname(__FILE__));
+if(PHP_SAPI !== 'cli'){
+    exit('This script must run in Command Line Interface.');
+}
+
+include_once "config.php";
+
+$config['autoload'] = ['common','db','vendor.autoload','cli'];
+$teaphp_autoroute = 'command';
+
+require_once(APP_PATH.DIRECTORY_SEPARATOR."vendor/teaphp/framework/src/tea.php");
+
+
+if(!empty($argv)){
+    if(file_exists(APP_PATH.'/command/'.$argv[1].'.php')){
+        $shell = load::classes('command.'.$argv[1]);
+        $shell->{$argv[2]}();
+    }else{
+        echo 'Command file not exist, Try again!';
+    }
+}else{
+    echo 'Undefined command, Try again!';
+}
+die;
+
+
+class command
+{
+    public $tea;
+    public $session;
+
+    function __construct($tea)
+    {
+        $this->tea = $tea;
+        if(method_exists($this,'init')){
+            $this->init();
+        }
+    }
+
+    public static function run(){
+    }
+}

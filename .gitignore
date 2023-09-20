@@ -1,0 +1,4 @@
+.idea/*
+data/cache/*.php
+vendor
+composer.lock
