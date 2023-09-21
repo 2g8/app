@@ -9,16 +9,27 @@ if(PHP_SAPI !== 'cli'){
 
 include_once "config.php";
 
-$config['autoload'] = ['common','db','vendor.autoload','cli'];
+$config['autoload'] = ['common','vendor.autoload'];
 $teaphp_autoroute = 'command';
 
 require_once(APP_PATH.DIRECTORY_SEPARATOR."vendor/teaphp/framework/src/tea.php");
 
 
 if(!empty($argv)){
-    if(file_exists(APP_PATH.'/command/'.$argv[1].'.php')){
-        $shell = load::classes('command.'.$argv[1]);
-        $shell->{$argv[2]}();
+    //这里解析一下命令,兼容 cmd:action 命令
+    if(strpos($argv[1], ':') > 0){
+        list($cmd, $action) = explode(':' , $argv[1]);
+        unset($argv[0]);unset($argv[1]);
+    }else{
+        $cmd = $argv[1];
+        $action = $argv[2];
+        unset($argv[0]);unset($argv[1]);unset($argv[2]);
+    }
+    define('CMDARGS', array_values($argv));
+
+    if(file_exists(APP_PATH.'/command/'.$cmd.'.php')){
+        $command = load::classes('command.'.$cmd);
+        $command->{$action}();
     }else{
         echo 'Command file not exist, Try again!';
     }
@@ -31,10 +42,12 @@ die;
 class command
 {
     public $tea;
+    public $db;
     public $session;
 
-    function __construct($tea)
+    function __construct()
     {
+        global $tea;
         $this->tea = $tea;
         if(method_exists($this,'init')){
             $this->init();
