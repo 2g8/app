@@ -1,14 +1,21 @@
 <?php
 defined('APP_PATH') or exit('No permission!');
 
+define('STATIC_PATH', '/assets/');
+define('STATIC_VERSION', '8');
+
 $config = [
     'mode'=>'debug',
+    'timezone' => 'Asia/Shanghai',                      // 设置时区
     //自动加载
-    'autoload' => ['db','view','session','common','vendor.autoload'],	//自动加载的类
+    'autoload' => ['db','view','lib.common','session','lib.seo','vendor.autoload'],	//自动加载的类
     //Session
     'session' => [
         'driver' => 'tea_db', 			// 设置session驱动类型
         'options' => [
+            'maxlifetime' => 3600*24*365*5,
+            'cache_expire' => 3600*24*365*5,
+            'cookie_lifetime' => 3600*24*365*5,
             'session_path' => '/tmp', 		// 默认session_path
         ]
     ],

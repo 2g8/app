@@ -7,9 +7,10 @@
     "require": {
         "php": "^7.0|^8.0",
         "teaphp/framework": "^1.1",
-        "ifsnop/mysqldump-php": "^2.12"
+        "ifsnop/mysqldump-php": "^2.12",
+        "melbahja/seo": "^2.1"
     },
-	"version": "1.1.0",
+	"version": "1.1.1",
     "config": {
         "preferred-install": "dist"
     },

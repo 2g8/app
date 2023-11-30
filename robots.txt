@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /uploadimg/
+
+Sitemap: https://9898555.com/data/sitemap.xml

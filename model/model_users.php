@@ -7,6 +7,7 @@ class model_users extends model {
     public $cloumns = array('lastlogin','lastip','regdate','regip','phone'); //字段
 
     function in($data){
+        $key = $val = '';
         $data['lastlogin'] = date('Y-m-d H:i:s');
         $data['lastip'] = getip();
         $data['regdate'] = date('Y-m-d H:i:s');
@@ -24,6 +25,7 @@ class model_users extends model {
     }
 
     function up($data,$id){
+        $upstr = '';
         $data['lastlogin'] = date('Y-m-d H:i:s');
         $data['lastip'] = getip();
         foreach($data as $k=>$v){

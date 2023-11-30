@@ -66,7 +66,7 @@ function mb_pathinfo($filepath) {
 }
 
 function bigid62($strnum,$isdecode = false){
-    $id62obj = load::classes('id62','','LkEhDuyXTViMrcIPNCGQq5msHz2KweafnJS4vYoj7gWbORtF830pA6dZUlBx19');
+    $id62obj = load::classes('lib.id62',APP_PATH,'LkEhDuyXTViMrcIPNCGQq5msHz2KweafnJS4vYoj7gWbORtF830pA6dZUlBx19');
     if($isdecode){
         return $id62obj->decode($strnum);
     }else{
@@ -75,7 +75,7 @@ function bigid62($strnum,$isdecode = false){
 }
 
 function id62($strnum,$isdecode = false){
-    $id62obj = load::classes('id62','','LkEhDuyXTViMrcIPNCGQq5msHz2KweafnJS4vYoj7gWbORtF830pA6dZUlBx19');
+    $id62obj = load::classes('lib.id62',APP_PATH,'LkEhDuyXTViMrcIPNCGQq5msHz2KweafnJS4vYoj7gWbORtF830pA6dZUlBx19');
     if($isdecode){
         $thestr = $id62obj->decode($strnum);
         $thenum = $thestr % 10000000;
@@ -258,3 +258,36 @@ function genfakeip(){
     $rand_key = mt_rand(0, 9);
     return long2ip(mt_rand($ip_long[$rand_key][0], $ip_long[$rand_key][1]));
 }
+
+function set_cookie($key, $value, $time = 0, $path = '', $httponly = FALSE) {
+    if($value != NULL) {
+        if(version_compare(PHP_VERSION, '5.2.0') >= 0) {
+            setcookie($key, $value, $time, $path, '', FALSE, $httponly);
+        } else {
+            setcookie($key, $value, $time, $path, '', FALSE);
+        }
+    } else {
+        if(version_compare(PHP_VERSION, '5.2.0') >= 0) {
+            setcookie($key, '', $time, $path, '', FALSE, $httponly);
+        } else {
+            setcookie($key, '', $time, $path, '', FALSE);
+        }
+    }
+}
+
+
+function getBrowserFingerprint() {
+    $data = '';
+    //$data .= getip(); //去掉IP地址
+    $data .= $_SERVER['HTTP_USER_AGENT'] ?? '';
+    $data .= $_SERVER['HTTP_ACCEPT'] ?? '';
+    $data .= $_SERVER['HTTP_ACCEPT_CHARSET'] ?? '';
+    $data .= $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
+    $data .= $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
+    /* Apply MD5 hash to the browser fingerprint */
+    $hash = md5($data);
+    return $hash;
+}
+
+//为了设置长期session, 自定义session_name和session_id
+session_name('visitor_id');
