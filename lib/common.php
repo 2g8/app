@@ -104,7 +104,7 @@ function isDate($date){
 }
 
 function isArray($val){
-    if(!empty($val) && is_array($val)){
+    if(isset($val) && !empty($val) && is_array($val)){
         return true;
     }else{
         return false;

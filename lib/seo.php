@@ -14,17 +14,18 @@ use Melbahja\Seo\Indexing;
 // -----------------------------------------------------------------------
 // 一般网页包含 title,description等
 // -----------------------------------------------------------------------
-function seo_metatags(){
+function seo_metatags($metadata = []){
+    if(!isset($metadata['title'])) $metadata['title'] = 'Quảng cáo rao vặt, Thông tin cuộc sống Việt Nam - 9898555.com';
+    if(!isset($metadata['keywords'])) $metadata['keywords'] = '9898555,9898555.com,Tuyển dụng, trang web tuyển dụng, thông tin tuyển dụng, việc bán thời gian, trang web bán thời gian, thông tin bán thời gian, thông tin tuyển dụng, việc làm, thông tin tuyển dụng, bất động sản, mua bán bất động sản, cho thuê bất động sản, sử dụng, chợ đã qua sử dụng, xe đã qua sử dụng, mua bán xe đã qua sử dụng, tuyên truyền của doanh nghiệp';
+    if(!isset($metadata['description'])) $metadata['description'] = 'Tuyển dụng, việc làm bán thời gian, bất động sản, mua bán, ô tô cũ, quảng cáo thương mại, phát hành và quản lý quảng cáo tại Hồ Chí Minh, Hà Nội và các khu vực khác tại Việt Nam.';
     $metatags = new MetaTags();
     return $metatags
-        ->title('PHP SEO')
-        ->description('This is my description')
-        ->meta('author', 'Mohamed Elabhja')
-        ->image('https://avatars3.githubusercontent.com/u/8259014')
-        ->mobile('https://m.example.com')
-        ->canonical('https://example.com')
-        ->shortlink('https://git.io/phpseo')
-        ->amp('https://apm.example.com');
+        ->title($metadata['title'])
+        ->meta('keywords', $metadata['keywords'])
+        ->description($metadata['description'])
+        ->image('https://9898555.com/assets/img/android-chrome-512x512.png');
+        //->mobile('https://9898555.com/?device=mobile')
+        //->canonical('https://9898555.com');
 }
 
 // -----------------------------------------------------------------------
