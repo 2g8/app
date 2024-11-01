@@ -8,7 +8,7 @@ $config = [
     'mode'=>'debug',
     'timezone' => 'Asia/Shanghai',                      // 设置时区
     //自动加载
-    'autoload' => ['db','view','lib.common','session','lib.seo','vendor.autoload'],	//自动加载的类
+    'autoload' => ['db','lib.common','session','api','vendor.autoload','lib.apifunc'],	//自动加载的类
     //Session
     'session' => [
         'driver' => 'tea_db', 			// 设置session驱动类型
@@ -19,6 +19,17 @@ $config = [
             'session_path' => '/tmp', 		// 默认session_path
         ]
     ],
+
+    'api' => array(										// API配置
+        'uri' => '/api/', 	                            // API访问路径定义
+        'path' => '/api', 	                            // API控制器程序的路径定义
+        'access-control-allow-origin' => isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*', 	        // 请求控制 域
+        'access-control-allow-methods' => 'PUT, GET, POST, PATCH, DELETE, OPTIONS', 	        // 请求控制 方法
+        'access-control-allow-credentials' => 'true', 	        // 请求控制 cookie
+        'access-control-allow-headers' => 'X-Requested-With, Authorization, Content-Type, X-Api-Key, X-App-Id', 	        // 请求控制 头
+        'access-control-max-age' => '86400', 	            // 请求控制 过期时间
+    ),
+
     //路由
     'uri' => [  									// 路由配置
         'type' => 'rewrite', 							// 路由方式. 默认为default方式，可选default,pathinfo,rewrite,tea
@@ -26,7 +37,7 @@ $config = [
         'default_action' => 'index',  					// 默认的动作名称
         'para_controller' => 'c',  						// 请求时使用的控制器变量标识
         'para_action' => 'a',  							// 请求时使用的动作变量标识
-        'suffix' => '.htm',									// 末尾添加的标记，一般为文件类型,如".html"，有助SEO
+        'suffix' => '',									// 末尾添加的标记，一般为文件类型,如".html"，有助SEO
     ],
 
     //模板视图
@@ -46,9 +57,9 @@ $config = [
         'driver' => 'tea_mysqli',   	// 驱动类型 tea_pdo,tea_mysql,tea_mysqli,tea_adodb
         'dbtype' => 'mysql', 			// 数据库类型
         'host' => '127.0.0.1', 			// 数据库地址
-        'dbuser' => 'app',       	// 数据库用户名
-        'dbpass' => '7412369',      	// 数据库密码
-        'dbname' => 'app',      	// 数据库名
+        'dbuser' => 'app',       		// 数据库用户名
+        'dbpass' => '123456',      		// 数据库密码
+        'dbname' => 'app',      		// 数据库名
         'prefix' => '',           		// 表前缀
         'charset' => 'utf8mb4',      	// 数据库编码 utf8mb4,utf8,gbk,gb2312
     ],

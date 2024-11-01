@@ -6,14 +6,26 @@
     "license": "MIT",
     "require": {
         "php": "^7.0|^8.0",
-        "teaphp/framework": "^1.1",
+        "teaphp/framework": "^1.2",
         "ifsnop/mysqldump-php": "^2.12",
-        "melbahja/seo": "^2.1"
+        "melbahja/seo": "^2.1",
+        "socialconnect/auth": "^3.3",
+        "symfony/http-foundation": "^7.0",
+        "davedevelopment/stiphle": "^0.9.4",
+        "godruoyi/php-snowflake": "^3.0"
     },
-	"version": "1.1.1",
+	"repositories": {
+        "teaphp/framework": {
+            "type": "path",
+            "url": "D:/github/framework",
+            "options": {
+                "symlink": true
+            }
+        },
+    },
+	"version": "1.2.0",
     "config": {
         "preferred-install": "dist"
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "minimum-stability": "dev"
 }
