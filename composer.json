@@ -14,15 +14,6 @@
         "davedevelopment/stiphle": "^0.9.4",
         "godruoyi/php-snowflake": "^3.0"
     },
-	"repositories": {
-        "teaphp/framework": {
-            "type": "path",
-            "url": "D:/github/framework",
-            "options": {
-                "symlink": true
-            }
-        },
-    },
 	"version": "1.2.0",
     "config": {
         "preferred-install": "dist"
